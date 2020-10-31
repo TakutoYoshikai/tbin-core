@@ -1,0 +1,56 @@
+tsys update
+  tsystemに含まれる全ての機能のアップデート
+  tsys update --tools
+    hack toolsの更新
+
+tsys migrate
+  tsystemのマイグレーション操作
+  tsys migrate diff
+    未実行のマイグレーションファイルの一覧表示
+  tsys migrate reset
+    新しいマイグレーションファイルを削除
+  tsys migrate add <name>
+    新しいマイグレーションファイルを作成
+  tsys migrate edit
+    マイグレーション済みファイルのリストを編集
+    
+tsys push
+  githubにtsystemの最新版をアップロード
+
+tsys install <apt package>
+  aptパッケージをインストールしてtsystemにもそれを保存
+
+tsys remove <apt package>
+  aptパッケージをアンインストールしてtsystemからも削除
+
+tsys status
+  tsystemの変更されたファイルを一覧でみる
+  tsys status apt
+    aptの差分を表示
+
+tsys commit
+  tsystemに含まれるファイルを全てgit commit
+
+tsys pull
+  githubから最新のtsystemをpull
+  tsys pull async
+    並列で実行
+
+tsys dir
+  tsys dir -h
+    カレントディレクトリを初期ディレクトリに
+  tsys dir <path>
+    初期ディレクトリを設定
+  tsys dir
+    初期ディレクトリをホームディレクトリに
+  
+tsys version
+  tsystemのバージョン表示
+  tsys version up
+    バージョンを上げてリモートにあげる
+
+tsys help
+  ヘルプの表示
+  tsys help edit
+    helpの編集
+

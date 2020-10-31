@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd ~/tsystem
+git add .
+git commit -m "update" &
+
+cd ~/tbin
+git add .
+git commit -m "update" &
+
+wait
+

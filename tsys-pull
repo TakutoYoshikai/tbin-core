@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "$1" = "async" ]; then
+  cd ~/tsystem
+  git pull origin master &
+
+  cd ~/tbin
+  git pull origin master &
+
+  wait
+  exit
+fi
+
+cd ~/tsystem
+git pull origin master
+
+cd ~/tbin
+git pull origin master
+

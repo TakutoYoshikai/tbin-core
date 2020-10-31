@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+tsys pull async
+tsys migrate
+
+cd ~/.ssh
+git pull origin master
+
+sudo apt autoremove -y

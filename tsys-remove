@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo apt remove $1
+ignore ~/tsystem/apt.txt $1
+if [ "$2" != "" ]; then
+  tsys-remove ${@:2}
+fi

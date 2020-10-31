@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd ~/tsystem
+cecho -b "=================="
+cecho -b "tsystem"
+git status
+
+cecho -b "=================="
+cecho -b "tbin"
+tbin status
+
+echo -e "\e[34m==================\e[m"

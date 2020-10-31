@@ -1,0 +1,118 @@
+#!/bin/bash
+
+if [ "$1" = "migrate" ]; then
+  cd ~/tsystem
+  if [ "$2" = "diff" ]; then
+    ./bin/migrate-diff.sh $3
+    exit
+  fi
+  if [ "$2" = "reset" ]; then
+    ./bin/migrate-reset.sh
+    exit
+  fi
+  if [ "$2" = "add" ]; then
+    ./bin/add-migration.sh $3
+    exit
+  fi
+  if [ "$2" = "edit" ]; then
+    if [ "$3" = "last" ]; then
+      cd migration
+      last=`ls | tail -n 1`
+      vim $last
+      exit
+    fi
+    vim migrated.txt
+    exit
+  fi
+  ./bin/migrate.sh
+  exit
+fi
+
+if [ "$1" = "edit" ]; then
+  edt tsys
+  exit
+fi
+
+if [ "$1" = "update" ]; then
+  tupdate ${@:2}
+  exit
+fi
+
+if [ "$1" = "push" ]; then
+  tsys-push
+  exit
+fi
+
+if [ "$1" = "install" ]; then
+  if [ "$2" = "-l" ]; then
+    less ~/tsystem/apt.txt 
+    exit
+  fi
+  tsys-install ${@:2}
+  exit
+fi
+
+if [ "$1" = "remove" ]; then
+  tsys-remove ${@:2 }
+  exit
+fi
+
+if [ "$1" = "status" ]; then
+  if [ "$2" = "apt" ]; then
+    cd ~/tsystem
+    git diff apt.txt
+    exit
+  fi
+  tsys-status | less -R
+  exit
+fi
+
+if [ "$1" = "commit" ]; then
+  tsys-commit
+  exit
+fi
+
+if [ "$1" = "pull" ]; then
+  tsys-pull ${@:2}
+  exit
+fi
+
+if [ "$1" = "save" ]; then
+  tsys version up
+  exit
+fi
+
+
+if [ "$1" = "help" ]; then 
+  tsys-help ${@:2}
+  exit
+fi
+
+if [ "$1" = "-h" ]; then 
+  tsys-help ${@:2}
+  exit
+fi
+
+if [ "$1" = "dir" ]; then 
+  if [ "$2" = "-h" ]; then
+    tsys-dir `pwd`
+    exit
+  fi
+  tsys-dir $2
+  exit
+fi
+
+if [ "$1" = "version" -o "$1" = "-v" ]; then
+  if [ "$2" = "change" ]; then
+    echo "$3" > ~/tsystem/version.txt 
+    exit
+  fi
+  if [ "$2" = "up" ]; then
+    tsys-versionup 
+    exit
+  fi
+  cat ~/tsystem/version.txt
+  exit
+fi
+
+tsys help

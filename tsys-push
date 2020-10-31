@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ~/tsystem
+git push origin master &
+
+cd ~/tbin
+git push origin master &
+
+wait
