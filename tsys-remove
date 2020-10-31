@@ -1,7 +1,14 @@
 #!/bin/bash
 
-sudo apt remove $1
-ignore ~/tsystem/apt.txt $1
+apt=`which apt`
+if [ "$apt" != "" ]; then
+  sudo apt remove $1
+fi
+yum=`which yum`
+if [ "$yum" != "" ]; then
+  sudo yum remove $1
+fi
+ignore ~/tsystem/package.txt $1
 if [ "$2" != "" ]; then
   tsys-remove ${@:2}
 fi

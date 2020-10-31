@@ -45,7 +45,7 @@ fi
 
 if [ "$1" = "install" ]; then
   if [ "$2" = "-l" ]; then
-    less ~/tsystem/apt.txt 
+    less ~/tsystem/package.txt 
     exit
   fi
   tsys-install ${@:2}
@@ -58,9 +58,9 @@ if [ "$1" = "remove" ]; then
 fi
 
 if [ "$1" = "status" ]; then
-  if [ "$2" = "apt" ]; then
+  if [ "$2" = "package" ]; then
     cd ~/tsystem
-    git diff apt.txt
+    git diff package.txt
     exit
   fi
   tsys-status | less -R

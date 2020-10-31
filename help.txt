@@ -17,16 +17,16 @@ tsys migrate
 tsys push
   githubにtsystemの最新版をアップロード
 
-tsys install <apt package>
-  aptパッケージをインストールしてtsystemにもそれを保存
+tsys install <apt/yum package>
+  apt/yumパッケージをインストールしてtsystemにもそれを保存
 
-tsys remove <apt package>
-  aptパッケージをアンインストールしてtsystemからも削除
+tsys remove <apt/yum package>
+  apt/yumパッケージをアンインストールしてtsystemからも削除
 
 tsys status
   tsystemの変更されたファイルを一覧でみる
-  tsys status apt
-    aptの差分を表示
+  tsys status package
+    packageの差分を表示
 
 tsys commit
   tsystemに含まれるファイルを全てgit commit

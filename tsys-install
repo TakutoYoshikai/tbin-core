@@ -2,14 +2,23 @@
 
 if [ "$1" = "" ]; then
   cd ~/tsystem/bin
-  ./apt-install.sh
+  ./package-install.sh
   exit
 fi
-ignore ~/tsystem/apt.txt $1
-echo "$1" >> ~/tsystem/apt.txt
-sudo apt install $1
+ignore ~/tsystem/package.txt $1
+echo "$1" >> ~/tsystem/package.txt
+
+apt=`which apt`
+if [ "$apt" != "" ]; then
+  sudo apt install $1
+fi
+yum=`which yum`
+if [ "$yum" != "" ]; then
+  sudo yum install $1
+fi
+
 if [ "$2" != "" ]; then
   tsys-install ${@:2}
 fi
-sort ~/tsystem/apt.txt > ~/tsystem/apt_tmp.txt
-mv ~/tsystem/apt_tmp.txt ~/tsystem/apt.txt
+sort ~/tsystem/package.txt > ~/tsystem/package_tmp.txt
+mv ~/tsystem/package_tmp.txt ~/tsystem/package.txt

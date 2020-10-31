@@ -1,12 +1,17 @@
 #!/bin/bash
 
-sudo apt-get update -y
-sudo apt-get upgrade -y
+apt=`which apt`
+if [ "$apt" != "" ]; then
+  sudo apt update -y
+  sudo apt upgrade -y
+fi
+yum=`which yum`
+if [ "$yum" != "" ]; then
+  sudo yum update -y
+fi
 
 tsys pull async
 tsys migrate
 
 cd ~/.ssh
 git pull origin master
-
-sudo apt autoremove -y
