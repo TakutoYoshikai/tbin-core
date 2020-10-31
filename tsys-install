@@ -8,11 +8,11 @@ fi
 ignore ~/tsystem/package.txt $1
 echo "$1" >> ~/tsystem/package.txt
 
-apt=`which apt`
+apt=`command -v apt`
 if [ "$apt" != "" ]; then
   sudo apt install $1
 fi
-yum=`which yum`
+yum=`command -v yum`
 if [ "$yum" != "" ]; then
   sudo yum install $1
 fi

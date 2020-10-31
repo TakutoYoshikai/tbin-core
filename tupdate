@@ -1,11 +1,11 @@
 #!/bin/bash
 
-apt=`which apt`
+apt=`command -v apt`
 if [ "$apt" != "" ]; then
   sudo apt update -y
   sudo apt upgrade -y
 fi
-yum=`which yum`
+yum=`command -v yum`
 if [ "$yum" != "" ]; then
   sudo yum update -y
 fi

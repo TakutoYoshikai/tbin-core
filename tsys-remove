@@ -1,10 +1,10 @@
 #!/bin/bash
 
-apt=`which apt`
+apt=`command -v apt`
 if [ "$apt" != "" ]; then
   sudo apt remove $1
 fi
-yum=`which yum`
+yum=`command -v yum`
 if [ "$yum" != "" ]; then
   sudo yum remove $1
 fi
