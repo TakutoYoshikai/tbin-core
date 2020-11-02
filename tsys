@@ -1,5 +1,13 @@
 #!/bin/bash
 
+mod=`command -v tsys-mod`
+if [ "$mod" != "" ]; then
+  tsys-mod $@
+  if [ $? -eq 0 ]; then
+    exit   
+  fi
+fi
+
 if [ "$1" = "migrate" ]; then
   cd ~/tsystem
   if [ "$2" = "diff" ]; then
