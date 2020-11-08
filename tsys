@@ -46,6 +46,11 @@ if [ "$1" = "update" ]; then
   exit
 fi
 
+if [ "$1" = "mod" ]; then
+  tsys-module ${@:2}
+  exit
+fi
+
 if [ "$1" = "push" ]; then
   tsys-push
   exit
