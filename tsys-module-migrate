@@ -1,0 +1,38 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+
+if [ "$1" = "add" ]; then
+  cd $2
+  if [ ! -d migration ]; then
+    mkdir migration
+  fi
+  cd migration
+  file=`date "+%Y%m%d-%H%M%S"`-$3.sh
+  echo "#!/bin/bash" >> $file
+  echo "" >> $file
+  vim $file
+  exit
+fi
+sudo apt install `tsys-package-list`
+sudo apt autoremove -y
+mods=($(ls))
+for mod in "${mods[@]}"
+do
+  cd $mod
+  touch ./migrated.txt
+  if [ -d ./migration ]; then
+    cd ./migration
+    files=($(ls))
+    for f in "${files[@]}"
+    do
+      if [ "`cat ../migrated.txt | grep $f`" = "" ]; then
+        echo "execute $f"
+        bash $f
+        echo $f >> ../migrated.txt
+      fi
+    done
+    cd ..
+  fi
+  cd ..
+done

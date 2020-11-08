@@ -1,0 +1,33 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+github=`cat ~/tsystem/github-id.txt`
+
+if [ ! -d $1 ]; then
+  mkdir $1
+  cd $1
+  echo migrated.txt >> .gitignore
+  git init
+  git remote add origin git@github.com:$github/tsystem-mod-$1.git
+  cd ..
+fi
+if [ -d $1/migration ]; then
+  cd $1/migration
+  files=($(ls))
+  for f in "${files[@]}"
+  do
+    if [ "`cat ../migrated.txt | grep $f`" = "" ]; then
+      echo "execute $f"
+      bash $f
+      echo $f >> ../migrated.txt
+    fi
+  done
+fi
+cd $1
+if [ "$2" != "" ]; then
+  if [ "$2" = "help" ]; then
+    vim help.txt 
+    exit
+  fi
+  mksh $2
+fi

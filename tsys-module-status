@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+mods=($(ls))
+for mod in "${mods[@]}"
+do
+  cd $mod
+  cecho -b "=================="
+  cecho -b tsystem-mod-$mod
+  git status
+  cd ..
+done

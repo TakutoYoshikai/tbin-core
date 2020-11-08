@@ -1,0 +1,34 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+github=`cat ~/tsystem/github-id.txt`
+
+if [ "$1" = "" ]; then
+  mods=`cat ~/tsystem/mod-requirements.txt`
+  if [ "$mods" != "" ]; then
+    tsys mod install $mods
+  fi
+  exit
+fi
+if [ ! -d $1 ]; then
+  git clone git@github.com:$github/tsystem-mod-$1.git $1
+  if [ -e $1/package.txt ]; then
+    sudo apt install `cat $1/package.txt`
+  fi
+  if [ -d $1/migration ]; then
+    cd $1/migration
+    files=($(ls))
+    touch ../migrated.txt
+    for f in "${files[@]}"
+    do
+      if [ "`cat ../migrated.txt | grep $f`" = "" ]; then
+        echo "execute $f"
+        bash $f
+        echo $f >> ../migrated.txt
+      fi
+    done
+  fi
+fi
+if [ "$2" != "" ]; then
+  tsys mod install ${@:2}
+fi

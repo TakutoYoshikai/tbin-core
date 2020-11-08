@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+if [ "$2" = "help" ]; then
+  vim $1/help.txt
+  exit
+fi
+if [ "$2" = "package" ]; then
+  vim $1/package.txt
+  exit
+fi
+if [ "$2" = "uninstall" ]; then
+  vim $1/uninstall
+  exit
+fi
+if [ "$2" = "migrated" ]; then
+  vim $1/migrated.txt
+  exit
+fi
+vim $1/$2

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+
+mods=($(ls))
+for mod in "${mods[@]}"
+do
+  cd $mod
+    git pull origin master
+  cd ..
+done
+
+tsys mod migrate

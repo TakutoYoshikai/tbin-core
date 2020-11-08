@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+
+cd $1
+if [ -e package.txt ]; then
+  sudo apt remove `cat package.txt`
+fi
+if [ -e uninstall ]; then
+  bash uninstall
+fi
+cd ..
+rm -rf $1
+sudo apt install `tsys-package-list`
+sudo apt autoremove -y

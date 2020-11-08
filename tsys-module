@@ -1,0 +1,60 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+if [ "$1" = "new" ]; then
+  tsys-module-new ${@:2}
+  exit
+fi
+if [ "$1" = "save" ]; then
+  tsys-module-save ${@:2}
+  exit
+fi
+
+if [ "$1" = "status" ]; then
+  tsys-module-status ${@:2}
+  exit
+fi
+
+if [ "$1" = "ls" -o "$1" = "list" ]; then
+  tsys-module-ls ${@:2}
+  exit
+fi
+
+if [ "$1" = "update" ]; then
+  tsys-module-update ${@:2}
+  exit
+fi
+
+if [ "$1" = "migrate" ]; then
+  tsys-module-migrate ${@:2}
+  exit
+fi
+
+if [ "$1" = "edit" ]; then
+  tsys-module-edit ${@:2}
+  exit
+fi
+
+if [ "$1" = "install" ]; then
+  if [ "$2" = "--save" ]; then
+    for mod in ${@:3}
+    do
+      tsys-module-install $mod
+      echo $mod >> ~/tsystem/mod-requirements.txt
+    done
+    exit
+  fi
+  tsys-module-install ${@:2}
+  exit
+fi
+
+if [ "$1" = "rm" -o "$1" = "uninstall" -o "$1" = "remove" ]; then
+  tsys-module-remove ${@:2}
+  exit
+fi
+
+if [ "$1" = "" ]; then
+  echo it needs subcommand.
+  exit
+fi
+echo tsys mod subcommand not found: $1

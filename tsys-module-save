@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd ~/tsystem-mods
+
+mods=($(ls))
+for mod in "${mods[@]}"
+do
+  cd $mod
+  git add .
+  git commit -m "update"
+  git push origin master
+  cd ..
+done
