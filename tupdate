@@ -12,6 +12,3 @@ fi
 
 tsys pull async
 tsys migrate
-
-cd ~/.ssh
-git pull origin master
