@@ -5,8 +5,9 @@ cecho -b "=================="
 cecho -b "tsystem"
 git status
 
+cd ~/tbin
 cecho -b "=================="
 cecho -b "tbin"
-tbin status
+git status
 
 echo -e "\e[34m==================\e[m"
