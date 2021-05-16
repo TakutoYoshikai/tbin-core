@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cat ~/tsystem/package.txt
+
+cd ~/tsystem-mods
+mods=($(ls))
+for mod in "${mods[@]}"
+do
+  cd $mod
+  if [ -e package.txt ]; then
+    cat package.txt
+  fi
+  cd ..
+done
