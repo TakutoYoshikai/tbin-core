@@ -13,7 +13,13 @@ fi
 if [ ! -d $1 ]; then
   git clone git@github.com:$github/tsystem-mod-$1.git $1
   if [ -e $1/package.txt ]; then
-    sudo apt install `cat $1/package.txt`
+    apt=`command -v apt`
+    yum=`command -v yum`
+    if [ "$apt" != "" ]; then
+      sudo apt install `cat $1/package.txt`
+    elif [ "$yum" != "" ]; then
+      sudo yum install `cat $1/package.txt`
+    fi
   fi
   if [ -d $1/migration ]; then
     cd $1/migration

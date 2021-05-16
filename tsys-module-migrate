@@ -14,8 +14,14 @@ if [ "$1" = "add" ]; then
   vim $file
   exit
 fi
-sudo apt install `tsys-package-list`
-sudo apt autoremove -y
+apt=`command -v apt`
+yum=`command -v yum`
+if [ "$apt" != "" ]; then
+  sudo apt install `tsys-package-list`
+  sudo apt autoremove -y
+elif [ "$yum" != "" ]; then
+  sudo yum install `tsys-package-list`
+fi
 mods=($(ls))
 for mod in "${mods[@]}"
 do
