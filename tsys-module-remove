@@ -30,5 +30,6 @@ if [ "$yum" != "" ]; then
   cd ..
   rm -rf $1
   sudo yum install `tsys-package-list`
+  sudo apt autoremove -y
   exit
 fi

@@ -21,6 +21,7 @@ if [ "$apt" != "" ]; then
   sudo apt autoremove -y
 elif [ "$yum" != "" ]; then
   sudo yum install `tsys-package-list`
+  sudo yum autoremove -y
 fi
 mods=($(ls))
 for mod in "${mods[@]}"
