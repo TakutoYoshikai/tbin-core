@@ -1,0 +1,26 @@
+#!/bin/bash
+
+mods=($(tmm ls))
+for mod in "${mods[@]}"
+do
+  tmm remove $mod
+done
+
+apt=`command -v apt`
+yum=`command -v yum`
+if [ "$apt" != "" ]; then
+  sudo apt remove `cat ~/tsystem/package.txt`
+  sudo apt autoremove
+  sudo rm -rf /etc/apt/sources.list.d/*
+elif [ "$yum" != "" ]; then
+  sudo yum remove `cat ~/tsystem/package.txt`
+  sudo yum autoremove
+  sudo rm -rf /etc/yum.repos.d/*
+fi
+
+cp ~/tsystem/bashrc_default.txt ~/.bashrc
+rm -rf ~/tsystem
+rm -rf ~/tbin
+rm -rf ~/workspace
+rm -rf ~/tsystem-mods
+
