@@ -8,8 +8,12 @@ fi
 ignore ~/tsystem/package.txt $1
 echo "$1" >> ~/tsystem/package.txt
 
+brew=`command -v brew`
 apt=`command -v apt`
-if [ "$apt" != "" ]; then
+if [ "$brew" != "" ]; then
+  brew install $1
+fi
+if [ "`uname`" != "Darwin" -a "$apt" != "" ]; then
   sudo apt install $1
 fi
 yum=`command -v yum`

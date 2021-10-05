@@ -1,12 +1,15 @@
 #!/bin/bash
 
+brew=`command -v brew`
 apt=`command -v apt`
-if [ "$apt" != "" ]; then
+yum=`command -v yum`
+if [ "$brew" != "" ]; then
+  brew update
+  brew upgrade
+elif [ "$apt" != "" ]; then
   sudo apt update -y
   sudo apt upgrade -y
-fi
-yum=`command -v yum`
-if [ "$yum" != "" ]; then
+elif [ "$yum" != "" ]; then
   sudo yum update -y
 fi
 
