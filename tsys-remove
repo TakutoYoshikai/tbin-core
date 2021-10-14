@@ -1,11 +1,13 @@
 #!/bin/bash
 
+brew=`command -v brew`
 apt=`command -v apt`
-if [ "$apt" != "" ]; then
-  sudo apt remove $1
-fi
 yum=`command -v yum`
-if [ "$yum" != "" ]; then
+if [ "$brew" != "" ]; then
+  brew uninstall $1
+elif [ "$apt" != "" ]; then
+  sudo apt remove $1
+elif [ "$yum" != "" ]; then
   sudo yum remove $1
 fi
 ignore ~/tsystem/package.txt $1
