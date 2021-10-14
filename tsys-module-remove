@@ -5,7 +5,20 @@ cd ~/tsystem-mods
 cd $1
 
 apt=`command -v apt`
-if [ "$apt" != "" ]; then
+brew=`command -v brew`
+yum=`command -v yum`
+if [ "$brew" != "" ]; then
+  if [ -e package.txt ]; then
+    brew uninstall `cat package.txt`
+  fi
+  if [ -e uninstall ]; then
+    bash uninstall
+  fi
+  cd ..
+  rm -rf $1
+  brew install `tsys-package-list`
+  exit
+elif [ "$apt" != "" ]; then
   if [ -e package.txt ]; then
     sudo apt remove `cat package.txt`
   fi
@@ -17,10 +30,7 @@ if [ "$apt" != "" ]; then
   sudo apt install `tsys-package-list`
   sudo apt autoremove -y
   exit
-fi
-
-yum=`command -v yum`
-if [ "$yum" != "" ]; then
+elif [ "$yum" != "" ]; then
   if [ -e package.txt ]; then
     sudo yum remove `cat package.txt`
   fi
