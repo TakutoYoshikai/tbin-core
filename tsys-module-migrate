@@ -16,7 +16,10 @@ if [ "$1" = "add" ]; then
 fi
 apt=`command -v apt`
 yum=`command -v yum`
-if [ "$apt" != "" ]; then
+brew=`command -v brew`
+if [ "$brew" != "" ]; then
+  brew install `tsys-package-list`
+elif [ "$apt" != "" ]; then
   sudo apt install `tsys-package-list`
   sudo apt autoremove -y
 elif [ "$yum" != "" ]; then

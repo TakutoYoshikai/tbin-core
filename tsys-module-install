@@ -15,7 +15,10 @@ if [ ! -d $1 ]; then
   if [ -e $1/package.txt ]; then
     apt=`command -v apt`
     yum=`command -v yum`
-    if [ "$apt" != "" ]; then
+    brew=`command -v brew`
+    if [ "$brew" != "" ]; then
+      brew install `cat $1/package.txt`	   
+    elif [ "$apt" != "" ]; then
       sudo apt install `cat $1/package.txt`
     elif [ "$yum" != "" ]; then
       sudo yum install `cat $1/package.txt`

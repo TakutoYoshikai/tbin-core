@@ -8,7 +8,10 @@ done
 
 apt=`command -v apt`
 yum=`command -v yum`
-if [ "$apt" != "" ]; then
+brew=`command -v brew`
+if [ "$brew" != "" ]; then
+  brew remove `cat ~/tsystem/package.txt`  
+elif [ "$apt" != "" ]; then
   sudo apt remove `cat ~/tsystem/package.txt`
   sudo apt autoremove
   sudo rm -rf /etc/apt/sources.list.d/*
