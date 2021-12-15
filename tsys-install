@@ -11,9 +11,11 @@ echo "$1" >> ~/tsystem/package.txt
 brew=`command -v brew`
 apt=`command -v apt`
 if [ "$brew" != "" ]; then
+  if [[ $1 == cask:* ]]; then
+    brew install --cask `echo $1 | sed -e 's/cask://g'`
+  fi
   brew install $1
-fi
-if [ "`uname`" != "Darwin" -a "$apt" != "" ]; then
+elif [ "`uname`" != "Darwin" -a "$apt" != "" ]; then
   sudo apt install $1
 fi
 yum=`command -v yum`
