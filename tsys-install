@@ -5,22 +5,33 @@ if [ "$1" = "" ]; then
   ./package-install.sh
   exit
 fi
-ignore ~/tsystem/package.txt $1
-echo "$1" >> ~/tsystem/package.txt
 
 brew=`command -v brew`
 apt=`command -v apt`
 if [ "$brew" != "" ]; then
   if [[ $1 == cask:* ]]; then
     brew install --cask `echo $1 | sed -e 's/cask://g'`
+  else
+    brew install $1
   fi
-  brew install $1
+  if [ "$?" = "0" ]; then
+    ignore ~/tsystem/package.txt $1
+    echo "$1" >> ~/tsystem/package.txt
+  fi
 elif [ "`uname`" != "Darwin" -a "$apt" != "" ]; then
   sudo apt install $1
+  if [ "$?" = "0" ]; then
+    ignore ~/tsystem/package.txt $1
+    echo "$1" >> ~/tsystem/package.txt
+  fi
 fi
 yum=`command -v yum`
 if [ "$yum" != "" ]; then
   sudo yum install $1
+  if [ "$?" = "0" ]; then
+    ignore ~/tsystem/package.txt $1
+    echo "$1" >> ~/tsystem/package.txt
+  fi
 fi
 
 if [ "$2" != "" ]; then
