@@ -10,7 +10,9 @@ elif [ "$apt" != "" ]; then
 elif [ "$yum" != "" ]; then
   sudo yum remove $1
 fi
-ignore ~/tsystem/package.txt $1
+if [ "$?" = "0" ]; then
+  ignore ~/tsystem/package.txt $1
+fi
 if [ "$2" != "" ]; then
   tsys-remove ${@:2}
 fi
